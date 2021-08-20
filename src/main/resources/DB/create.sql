@@ -17,15 +17,14 @@ CREATE TABLE IF NOT EXISTS newsdepartmental (
 );
 
 
-CREATE TABLE IF NOT EXISTS departmnets (
+CREATE TABLE IF NOT EXISTS departments (
     id int serial PRIMARY KEY,
-    department VARCHAR,
-    detail VARCHAR,
-
+    name VARCHAR,
+    description VARCHAR,
 );
 
 CREATE TABLE IF NOT EXISTS roles (
     id int serial PRIMARY KEY,
-    detail VARCHAR
+    name VARCHAR
 );
 

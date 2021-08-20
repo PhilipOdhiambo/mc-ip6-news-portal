@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EmployeeDao {
     //  CREATE
-    public void add();
+    public void add(Employee employee);
     public void addToRole(Employee employee, Role role);
 
     // READ

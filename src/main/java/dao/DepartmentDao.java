@@ -12,19 +12,16 @@ public interface DepartmentDao {
     //// CREATE
 
     // Add department to database
-    public void add();
+    public void add(Department department);
 
 
     //// READ
 
     // Get all departments
     public List<Department> getAll();
+    public Department getById(int id);
     public List<Employee> getEmployeesByDepartment(int departmentId);
     public List<NewsDepartmental> getNewsDepartmentalByDepartment(int departmentId);
-
-    // Get a department by id
-    public Department getById(int id);
-
 
     //// UPDATE
 
@@ -32,7 +29,7 @@ public interface DepartmentDao {
 
     ///// DELETE
     public void deleteById(int id);
-    public void deleteAll();
+
 
 
 }
