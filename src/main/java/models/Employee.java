@@ -1,14 +1,13 @@
 package models;
 
-import java.util.List;
 import java.util.Objects;
 
-public class User {
+public class Employee {
     private int id;
     private String name;
     private int departmentid;
 
-    public User(String name, int departmentid) {
+    public Employee(String name, int departmentid) {
         this.name = name;
         this.departmentid = departmentid;
     }
@@ -41,8 +40,8 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && departmentid == user.departmentid && Objects.equals(name, user.name);
+        Employee employee = (Employee) o;
+        return id == employee.id && departmentid == employee.departmentid && Objects.equals(name, employee.name);
     }
 
     @Override

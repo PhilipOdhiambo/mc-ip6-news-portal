@@ -4,16 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserTest {
+class EmployeeTest {
     @Test
     void instance_newUserInstanceCreated_user() {
-        User user = getNewUser();
-        assertTrue(user instanceof User);
+        Employee employee = getNewUser();
+        assertTrue(employee instanceof Employee);
     }
 
 
     // helpers
-    public User getNewUser() {
-        return new User("Philip",1);
+    public Employee getNewUser() {
+        return new Employee("Philip",1);
     }
 }
