@@ -1,0 +1,17 @@
+package dao;
+
+import models.NewsDepartmental;
+
+import java.util.List;
+
+public interface NewsDepartmentalDao {
+    // CREATE
+    public void add();
+
+    // READ
+    public List<NewsDepartmental> getAll();
+    public NewsDepartmental getById();
+
+    // DELETE
+    public void deleteById();
+}
