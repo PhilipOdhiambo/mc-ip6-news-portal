@@ -6,14 +6,17 @@ import models.Role;
 import java.util.List;
 
 public interface RoleDao {
-
-    // ADD
+    //  CREATE
     public void add(Role role);
-    public void addToEmployee(Role role, Employee employee);
+    public void addRoleToEmloyee(Role role, Employee employee);
 
     // READ
     public List<Role> getAll();
+    public Role getById(int id);
+    public List<Employee> getEmployeesForRole(int id);
 
     // DELETE
-    public void deleById(int id);
+    public void deleteById(int id);
+
+
 }

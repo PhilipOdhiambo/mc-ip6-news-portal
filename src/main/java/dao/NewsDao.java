@@ -11,4 +11,7 @@ public interface NewsDao {
     // READ
     public List<News> getAll();
     public News getById(int id);
+
+    // DELETE
+    public void deleteById(int id);
 }

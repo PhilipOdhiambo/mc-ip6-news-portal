@@ -28,3 +28,9 @@ CREATE TABLE IF NOT EXISTS roles (
     name VARCHAR
 );
 
+CREATE TABLE IF NOT EXISTS employees-roles (
+ id serial int PRIMARY KEY,
+ employeeid INTEGER,
+ roleid INTEGER
+);
+

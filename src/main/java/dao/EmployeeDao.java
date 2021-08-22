@@ -8,10 +8,11 @@ import java.util.List;
 public interface EmployeeDao {
     //  CREATE
     public void add(Employee employee);
-    public void addToRole(Employee employee, Role role);
+    public void addEmployeeToRole(Employee employee, Role role);
 
     // READ
     public List<Employee> getAll();
+    public Employee getById(int id);
     public List<Role> getRolesForEmployee(int id);
 
     // DELETE
