@@ -11,6 +11,11 @@ CREATE TABLE IF NOT EXISTS employees (
     departmentid INTEGER
 );
 
+CREATE TABLE IF NOT EXISTS news (
+    id int PRIMARY KEY auto_increment,
+    content VARCHAR
+);
+
 
 
 
