@@ -13,6 +13,6 @@ class DepartmentTest {
 
     // helpers
     public Department getNewDepartment() {
-        return  new Department("Administration");
+        return  new Department("Administration", "Deals with administrative issues");
     }
 }

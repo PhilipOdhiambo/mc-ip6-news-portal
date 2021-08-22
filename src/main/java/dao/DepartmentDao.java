@@ -2,7 +2,6 @@ package dao;
 
 import models.Department;
 import models.Employee;
-import models.News;
 import models.NewsDepartmental;
 
 import java.util.List;

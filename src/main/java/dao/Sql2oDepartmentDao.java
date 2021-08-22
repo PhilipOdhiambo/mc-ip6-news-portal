@@ -5,6 +5,7 @@ import models.Employee;
 import models.NewsDepartmental;
 import org.sql2o.Sql2o;
 import org.sql2o.Connection;
+import org.sql2o.Sql2oException;
 
 import java.util.List;
 
@@ -16,22 +17,18 @@ public class Sql2oDepartmentDao implements DepartmentDao {
     }
 
 
-//    CREATE TABLE IF NOT EXISTS departments (
-//            id int serial PRIMARY KEY,
-//            name VARCHAR,
-//            description VARCHAR,
-//            );
-
-
     @Override
     public void add(Department department) {
         String sql = "INSERT INTO  departments (name,description) VALUES (:name, :description)";
         try(Connection conn = SQL2O.open()){
             int id = (int) conn.createQuery(sql, true)
-                    .bind(department)
+                    .addParameter("name", department.getName())
+                    .addParameter("description",department.getDescription())
                     .executeUpdate()
                     .getKey();
             department.setId(id);
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
         }
     }
 

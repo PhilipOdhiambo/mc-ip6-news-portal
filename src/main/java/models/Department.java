@@ -7,8 +7,10 @@ public class Department {
     private String name;
     private String description;
 
-    public Department(String name) {
+
+    public Department(String name, String description) {
         this.name = name;
+        this.description = description;
     }
 
     public int getId() {
@@ -25,6 +27,14 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
