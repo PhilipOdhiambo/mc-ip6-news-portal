@@ -13,16 +13,14 @@ class Sql2oDepartmentDaoTest {
 
     private Connection conn;
     private Sql2oDepartmentDao departmentDao;
-    private Sql2oNewsDepartmentalDao newsDepartmentalDao;
-    private Sql2oEmployeeDao employeeDao;
+
 
     @BeforeEach
     void setUp() {
         String connectionString =  "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
         Sql2o sql2o = new Sql2o(connectionString, "philip", "1234");
         departmentDao = new Sql2oDepartmentDao(sql2o);
-        newsDepartmentalDao = new Sql2oNewsDepartmentalDao(sql2o);
-        employeeDao = new Sql2oEmployeeDao(sql2o);
+
         conn = sql2o.open();
     }
 

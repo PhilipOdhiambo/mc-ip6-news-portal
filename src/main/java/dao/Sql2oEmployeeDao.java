@@ -24,7 +24,8 @@ public class Sql2oEmployeeDao implements EmployeeDao {
         String sql = "INSERT INTO employees (name,departmentid) VALUES (:name,:departmentid)";
         try(Connection conn = SQLO.open()){
             int id = (int) conn.createQuery(sql, true)
-                    .bind(employee)
+                    .addParameter("name", employee.getName())
+                    .addParameter("departmentid", employee.getDepartmentid())
                     .executeUpdate().getKey();
             employee.setId(id);
         }
