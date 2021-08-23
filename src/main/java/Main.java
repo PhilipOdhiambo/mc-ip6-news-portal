@@ -25,6 +25,7 @@ public class Main {
         // Department Routes
 
         // Post a new department
+
         post("/departments/new", "application/json", (req, res) -> {
             Department department = gson.fromJson(req.body(), Department.class);//make java from JSON with GSON
             departments.add(department);// Add department to database
