@@ -35,10 +35,12 @@ public class Sql2oNewsDepartmentalDao implements NewsDepartmentalDao {
     }
 
     @Override
-    public NewsDepartmental getById(int id) {
+    public NewsDepartmental getById(int id, int departmentid) {
         try(Connection connection = SQLO.open()) {
-            return connection.createQuery("SELECT * FROM newsdepartmental WHERE id = :id")
+            return connection.createQuery("SELECT * FROM newsdepartmental WHERE id = :id" +
+                            " AND departmentid = :departmentid")
                     .addParameter("id", id)
+                    .addParameter("departmentid", departmentid)
                     .executeAndFetchFirst(NewsDepartmental.class);
         }
     }

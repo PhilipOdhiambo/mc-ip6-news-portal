@@ -3,29 +3,35 @@ import com.google.gson.Gson;
 import dao.*;
 import models.Department;
 import models.Employee;
-import org.sql2o.Connection;
-import org.sql2o.Sql2o;
+import models.News;
+import models.NewsDepartmental;
 
 public class Main {
     public static void main(String[] args) {
 
-        Connection conn;
         Gson gson = new Gson();
 
-        String connectionString = "jdbc:h2:~/news-portal.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        // Database connection
+        int portNumber = DatabaseConnection.getPortNumber();
+        port(portNumber);
 
-        Sql2oDepartmentDao departments =  new Sql2oDepartmentDao(sql2o);
-        Sql2oEmployeeDao employees = new Sql2oEmployeeDao(sql2o);
-        Sqlo2RoleDao roles = new Sqlo2RoleDao(sql2o);
-        Sql2oNewsDao newsGeneral = new Sql2oNewsDao(sql2o);
-        Sql2oNewsDepartmentalDao newsDepartmental = new Sql2oNewsDepartmentalDao(sql2o);
+        staticFileLocation("/public");
+
+        Sql2oDepartmentDao departments =  new Sql2oDepartmentDao(DatabaseConnection.sql2o);
+        Sql2oEmployeeDao employees = new Sql2oEmployeeDao(DatabaseConnection.sql2o);
+        Sqlo2RoleDao roles = new Sqlo2RoleDao(DatabaseConnection.sql2o);
+        Sql2oNewsDao newsGeneral = new Sql2oNewsDao(DatabaseConnection.sql2o);
+        Sql2oNewsDepartmentalDao newsDepartmental = new Sql2oNewsDepartmentalDao(DatabaseConnection.sql2o);
+
+        get("/", (req,res) -> {
+            res.redirect("index.html");
+            return null;
+        });
 
 
         // Department Routes
 
         // Post a new department
-
         post("/departments/new", "application/json", (req, res) -> {
             Department department = gson.fromJson(req.body(), Department.class);//make java from JSON with GSON
             departments.add(department);// Add department to database
@@ -38,7 +44,7 @@ public class Main {
             return gson.toJson(departments.getAll());
         });
 
-        // Read a single department b id
+        // Read a single department
         get("/departments/:id", "application/json", (req, res) -> {
             res.type("application/json");
             int departmentId = Integer.parseInt(req.params("id"));
@@ -76,7 +82,67 @@ public class Main {
         });
 
 
-        //
+        // General news
+
+        //Post news
+        post("/general-news/new", "application/json",(req,res) -> {
+            News generalNews = gson.fromJson(req.body(), News.class);
+            newsGeneral.add(generalNews);
+            return gson.toJson(generalNews);
+        });
+
+        // Get news by id
+        get("/general-news/:id", "application/json",(req,res) -> {
+            int newsId = Integer.parseInt(req.params("id"));
+            return gson.toJson(newsGeneral.getById(newsId));
+        });
+
+        // Get all general news
+        get("/general-news", "application/json",(req,res) -> {
+            return gson.toJson(newsGeneral.getAll());
+        });
+
+        // DELETE
+
+        // Delete now by id
+        get("/general-news/:id/delete", "application/json",(req,res) -> {
+            int newsId = Integer.parseInt(req.params("id"));
+            newsGeneral.deleteById(newsId);
+            return null;
+        });
+
+
+
+        // NewsDepartmental
+
+        //Post news
+        post("/departments/:departmentId/news-departmental/new", "application/json",(req,res) -> {
+            int departmentId = Integer.parseInt(req.params("departmentId"));
+            NewsDepartmental departmentalNews = gson.fromJson(req.body(), NewsDepartmental.class);
+            newsDepartmental.add(departmentalNews);
+            return gson.toJson(departmentalNews);
+        });
+
+        // Get news by id
+        get("/departments/:departmentId/news-departmental/id", "application/json",(req,res) -> {
+            int newsId = Integer.parseInt(req.params("id"));
+            int departmentid = Integer.parseInt(req.params("departmentId"));
+            return gson.toJson(newsDepartmental.getById(newsId, departmentid));
+        });
+
+        // Get all general news
+        get("/departmental-news", "application/json",(req,res) -> {
+            return gson.toJson(newsGeneral.getAll());
+        });
+
+        // DELETE
+
+        // Delete news by id
+        get("/departmental-news/:id/delete", "application/json",(req,res) -> {
+            int newsId = Integer.parseInt(req.params("id"));
+            newsGeneral.deleteById(newsId);
+            return null;
+        });
 
 
         //FILTERS

@@ -14,11 +14,13 @@ There is news for the general members of the organisation and news that are cate
 
 You are able to add news employees, news, departments and employee roles if authorized.
 
-## Live Demo
+## HOW TO CONSUME API
 
-Since this app is an API, there is no user interface. You are suppose to cosume the API in you own frontend.
+Go to [this site](https://mc-news-portal.herokuapp.com/) for ways to consume the api.
 
-However you can confirm usge on postman where you can test various commands.
+You can consume the routes in you front end application .
+
+However you can practice and confirm usage on postman where you can test various routes.
 
 
 

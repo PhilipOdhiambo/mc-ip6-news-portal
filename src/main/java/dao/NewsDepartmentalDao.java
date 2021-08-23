@@ -10,7 +10,7 @@ public interface NewsDepartmentalDao {
 
     // READ
     public List<NewsDepartmental> getAll();
-    public NewsDepartmental getById(int id);
+    public NewsDepartmental getById(int id, int departmentid);
 
     // DELETE
     public void deleteById(int id);

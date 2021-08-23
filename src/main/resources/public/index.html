@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: aliceblue;
+    }
+
+    ul {
+        list-style: none;
+        max-height: 80vh;
+        overflow: auto;
+    }
+
+    li {
+        margin-bottom: 1.5rem;
+        box-shadow: inset;
+        background-color: white;
+        padding: 1.5rem;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h2>News Portal API</h2>
+
+        <div class="intro">
+
+            <p> Welcome to news-portal APIThis page documents Ways to consume the API</p>
+
+            <p>Base href is: https://mc-news-portal.herokuapp.com</p>
+        </div>
+
+        <ul>
+            <li>
+                To display list of users:
+                <div class="route">
+                    /api/employees
+                </div>
+            </li>
+            <li>Add a new user:
+                <div>POST</div>
+                <div class="route">
+                    /api/departments/:departmentId/users/new
+                </div>
+            </li>
+            <li>
+                Get specific user:
+                <div class="route">
+                    /api/users/:id
+                </div>
+            </li>
+            <li>
+                To display list of departments:
+                <div class="route">
+                    /api/departments
+                </div>
+            </li>
+            <li>
+                To display one department:
+                <div class="route">
+                    /api/departments/:id
+                </div>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+</body>
+
+</html>
