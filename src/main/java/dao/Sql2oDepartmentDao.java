@@ -19,11 +19,10 @@ public class Sql2oDepartmentDao implements DepartmentDao {
 
     @Override
     public void add(Department department) {
-        String sql = "INSERT INTO  departments (name,description) VALUES (:name, :description)";
+        String sql = "INSERT INTO  departments (name,description) VALUES (:name, :description);";
         try(Connection conn = SQL2O.open()){
-            int id = (int) conn.createQuery(sql, true)
-                    .addParameter("name", department.getName())
-                    .addParameter("description",department.getDescription())
+           int id = (int) conn.createQuery(sql, true)
+                    .bind(department)
                     .executeUpdate()
                     .getKey();
             department.setId(id);
@@ -34,7 +33,7 @@ public class Sql2oDepartmentDao implements DepartmentDao {
 
     @Override
     public List<Department> getAll() {
-        String sql = "SELECT * FROM departments";
+        String sql = "SELECT * FROM departments;";
         try(Connection conn = SQL2O.open()){
             return conn.createQuery(sql).executeAndFetch(Department.class);
         }
@@ -56,7 +55,7 @@ public class Sql2oDepartmentDao implements DepartmentDao {
         String sql = "SELECT * FROM employees WHERE departmentid = :departmentId";
         try(Connection conn = SQL2O.open()){
             return conn.createQuery(sql)
-                    .addParameter("departmentid", departmentId)
+                    .addParameter("departmentId", departmentId)
                     .executeAndFetch(Employee.class);
         } catch (Sql2oException ex) {
             System.out.println(ex);

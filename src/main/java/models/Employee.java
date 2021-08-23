@@ -7,9 +7,8 @@ public class Employee {
     private String name;
     private int departmentid;
 
-    public Employee(String name, int departmentid) {
+    public Employee(String name) {
         this.name = name;
-        this.departmentid = departmentid;
     }
 
     public int getId() {

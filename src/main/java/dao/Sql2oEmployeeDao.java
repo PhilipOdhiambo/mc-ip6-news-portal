@@ -20,14 +20,17 @@ public class Sql2oEmployeeDao implements EmployeeDao {
     /* ----  CREATE --------- */
 
     @Override
-    public void add(Employee employee, int departmentId) {
-        String sql = "INSERT INTO employees (name,departmentid) VALUES (:name,:departmentid)";
+    public void add(Employee employee) {
+        String sql = "INSERT INTO employees (name, departmentid) VALUES (:name,:departmentid);";
         try(Connection conn = SQLO.open()){
             int id = (int) conn.createQuery(sql, true)
                     .addParameter("name", employee.getName())
-                    .addParameter("departmentid", departmentId)
-                    .executeUpdate().getKey();
+                    .addParameter("departmentid", employee.getDepartmentid())
+                    .executeUpdate()
+                    .getKey();
             employee.setId(id);
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
         }
     }
 

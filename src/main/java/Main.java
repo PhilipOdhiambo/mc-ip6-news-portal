@@ -31,27 +31,33 @@ public class Main {
             res.status(201);// Set status code for resource created
             return gson.toJson(department);//send it back to be displayed
         });
+
         // Read all departments
         get("/departments", "application/json", (req, res) -> {
             return gson.toJson(departments.getAll());
         });
 
+        // Read a single department b id
         get("/departments/:id", "application/json", (req, res) -> {
             res.type("application/json");
             int departmentId = Integer.parseInt(req.params("id"));
             return gson.toJson(departments.getById(departmentId));
         });
 
+        // Delete a department
+
 
 
         // Employee/User Routes
         // Add a new employee
         post("/departments/:deptId/employees/new", "application/json", (req, res) -> {
-            Employee employee = gson.fromJson(req.body(), Employee.class);//make java from JSON with GSON
+            Employee employee = gson.fromJson(req.body(), Employee.class);
             int departmentId = Integer.parseInt(req.params("deptId"));
-            employees.add(employee, departmentId);
-            res.status(201);
-            return gson.toJson(employees.getById(employee.getId()));
+            employee.setDepartmentid(departmentId);
+            employees.add(employee);
+            Employee createdEmployee = employees.getById(employee.getId());
+//            res.status(201);
+            return gson.toJson(createdEmployee);
         });
         // Get all employees
         get("/employees", "application/json", (req, res) -> {
@@ -60,15 +66,16 @@ public class Main {
         // Get employees in a department
         get("/departments/:id/employees", "application/json", (req, res) -> {
             int departmentId = Integer.parseInt(req.params("id"));
-            System.out.println(departmentId);
             return gson.toJson(departments.getEmployeesByDepartment(departmentId));
         });
         // Get employee by id
         get("/employees/:id", "application/json", (req, res) -> {
-            res.type("application/json");
-            int employeeId = Integer.parseInt(req.params("id"));
-            return gson.toJson(employees.getById(employeeId));
+            int id = Integer.parseInt(req.params("id"));
+            return gson.toJson(employees.getById(id));
         });
+
+
+        //
 
 
         //FILTERS

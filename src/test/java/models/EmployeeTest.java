@@ -14,6 +14,6 @@ class EmployeeTest {
 
     // helpers
     public Employee getNewEmployee() {
-        return new Employee("Philip",1);
+        return new Employee("Philip");
     }
 }
