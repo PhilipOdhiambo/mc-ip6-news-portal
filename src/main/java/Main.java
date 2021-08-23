@@ -32,7 +32,7 @@ public class Main {
         // Department Routes
 
         // Post a new department
-        post("/departments/new", "application/json", (req, res) -> {
+        post("api/departments/new", "application/json", (req, res) -> {
             Department department = gson.fromJson(req.body(), Department.class);//make java from JSON with GSON
             departments.add(department);// Add department to database
             res.status(201);// Set status code for resource created
@@ -40,12 +40,12 @@ public class Main {
         });
 
         // Read all departments
-        get("/departments", "application/json", (req, res) -> {
+        get("api/departments", "application/json", (req, res) -> {
             return gson.toJson(departments.getAll());
         });
 
         // Read a single department
-        get("/departments/:id", "application/json", (req, res) -> {
+        get("api/departments/:id", "application/json", (req, res) -> {
             res.type("application/json");
             int departmentId = Integer.parseInt(req.params("id"));
             return gson.toJson(departments.getById(departmentId));
@@ -57,7 +57,7 @@ public class Main {
 
         // Employee/User Routes
         // Add a new employee
-        post("/departments/:deptId/employees/new", "application/json", (req, res) -> {
+        post("api/departments/:deptId/employees/new", "application/json", (req, res) -> {
             Employee employee = gson.fromJson(req.body(), Employee.class);
             int departmentId = Integer.parseInt(req.params("deptId"));
             employee.setDepartmentid(departmentId);
@@ -67,16 +67,16 @@ public class Main {
             return gson.toJson(createdEmployee);
         });
         // Get all employees
-        get("/employees", "application/json", (req, res) -> {
+        get("api/employees", "application/json", (req, res) -> {
             return gson.toJson(employees.getAll());
         });
         // Get employees in a department
-        get("/departments/:id/employees", "application/json", (req, res) -> {
+        get("api/departments/:id/employees", "application/json", (req, res) -> {
             int departmentId = Integer.parseInt(req.params("id"));
             return gson.toJson(departments.getEmployeesByDepartment(departmentId));
         });
         // Get employee by id
-        get("/employees/:id", "application/json", (req, res) -> {
+        get("api/employees/:id", "application/json", (req, res) -> {
             int id = Integer.parseInt(req.params("id"));
             return gson.toJson(employees.getById(id));
         });
@@ -85,27 +85,27 @@ public class Main {
         // General news
 
         //Post news
-        post("/general-news/new", "application/json",(req,res) -> {
+        post("api/general-news/new", "application/json",(req,res) -> {
             News generalNews = gson.fromJson(req.body(), News.class);
             newsGeneral.add(generalNews);
             return gson.toJson(generalNews);
         });
 
         // Get news by id
-        get("/general-news/:id", "application/json",(req,res) -> {
+        get("api/general-news/:id", "application/json",(req,res) -> {
             int newsId = Integer.parseInt(req.params("id"));
             return gson.toJson(newsGeneral.getById(newsId));
         });
 
         // Get all general news
-        get("/general-news", "application/json",(req,res) -> {
+        get("api/general-news", "application/json",(req,res) -> {
             return gson.toJson(newsGeneral.getAll());
         });
 
         // DELETE
 
         // Delete now by id
-        get("/general-news/:id/delete", "application/json",(req,res) -> {
+        get("api/general-news/:id/delete", "application/json",(req,res) -> {
             int newsId = Integer.parseInt(req.params("id"));
             newsGeneral.deleteById(newsId);
             return null;
@@ -116,7 +116,7 @@ public class Main {
         // NewsDepartmental
 
         //Post news
-        post("/departments/:departmentId/news-departmental/new", "application/json",(req,res) -> {
+        post("api/departments/:departmentId/news-departmental/new", "application/json",(req,res) -> {
             int departmentId = Integer.parseInt(req.params("departmentId"));
             NewsDepartmental departmentalNews = gson.fromJson(req.body(), NewsDepartmental.class);
             newsDepartmental.add(departmentalNews);
@@ -124,21 +124,21 @@ public class Main {
         });
 
         // Get news by id
-        get("/departments/:departmentId/news-departmental/id", "application/json",(req,res) -> {
+        get("api/departments/:departmentId/news-departmental/id", "application/json",(req,res) -> {
             int newsId = Integer.parseInt(req.params("id"));
             int departmentid = Integer.parseInt(req.params("departmentId"));
             return gson.toJson(newsDepartmental.getById(newsId, departmentid));
         });
 
         // Get all general news
-        get("/departmental-news", "application/json",(req,res) -> {
+        get("api/departmental-news", "application/json",(req,res) -> {
             return gson.toJson(newsGeneral.getAll());
         });
 
         // DELETE
 
         // Delete news by id
-        get("/departmental-news/:id/delete", "application/json",(req,res) -> {
+        get("api/departmental-news/:id/delete", "application/json",(req,res) -> {
             int newsId = Integer.parseInt(req.params("id"));
             newsGeneral.deleteById(newsId);
             return null;
