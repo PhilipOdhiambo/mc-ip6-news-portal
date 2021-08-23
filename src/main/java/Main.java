@@ -21,6 +21,7 @@ public class Main {
         Sql2oNewsDao newsGeneral = new Sql2oNewsDao(sql2o);
         Sql2oNewsDepartmentalDao newsDepartmental = new Sql2oNewsDepartmentalDao(sql2o);
 
+
         // Department Routes
 
         // Post a new department
@@ -28,19 +29,16 @@ public class Main {
             Department department = gson.fromJson(req.body(), Department.class);//make java from JSON with GSON
             departments.add(department);// Add department to database
             res.status(201);// Set status code for resource created
-            res.type("application/json");
             return gson.toJson(department);//send it back to be displayed
         });
         // Read all departments
         get("/departments", "application/json", (req, res) -> {
-            res.type("application/json");
             return gson.toJson(departments.getAll());
         });
 
         get("/departments/:id", "application/json", (req, res) -> {
             res.type("application/json");
             int departmentId = Integer.parseInt(req.params("id"));
-            res.type("application/json");
             return gson.toJson(departments.getById(departmentId));
         });
 
@@ -53,18 +51,15 @@ public class Main {
             int departmentId = Integer.parseInt(req.params("deptId"));
             employees.add(employee, departmentId);
             res.status(201);
-            res.type("application/json");
             return gson.toJson(employees.getById(employee.getId()));
         });
         // Get all employees
         get("/employees", "application/json", (req, res) -> {
-            res.type("application/json");
             return gson.toJson(employees.getAll());
         });
         // Get employees in a department
         get("/departments/:id/employees", "application/json", (req, res) -> {
             int departmentId = Integer.parseInt(req.params("id"));
-            res.type("application/json");
             System.out.println(departmentId);
             return gson.toJson(departments.getEmployeesByDepartment(departmentId));
         });
@@ -72,8 +67,14 @@ public class Main {
         get("/employees/:id", "application/json", (req, res) -> {
             res.type("application/json");
             int employeeId = Integer.parseInt(req.params("id"));
-            res.type("application/json");
             return gson.toJson(employees.getById(employeeId));
+        });
+
+
+        //FILTERS
+
+        after((req, res) ->{
+            res.type("application/json");
         });
     }
 }

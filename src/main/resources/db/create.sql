@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS departments (
 CREATE TABLE IF NOT EXISTS employees (
     id int PRIMARY KEY auto_increment,
     name VARCHAR,
-    departmentid INTEGER
+    departmentid int
 );
 
 CREATE TABLE IF NOT EXISTS news (

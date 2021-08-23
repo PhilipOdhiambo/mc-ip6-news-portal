@@ -58,6 +58,9 @@ public class Sql2oDepartmentDao implements DepartmentDao {
             return conn.createQuery(sql)
                     .addParameter("departmentid", departmentId)
                     .executeAndFetch(Employee.class);
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+            return null;
         }
     }
 
