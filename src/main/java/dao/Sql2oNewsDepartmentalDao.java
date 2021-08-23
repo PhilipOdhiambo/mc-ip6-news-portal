@@ -16,11 +16,11 @@ public class Sql2oNewsDepartmentalDao implements NewsDepartmentalDao {
 
     @Override
     public void add(NewsDepartmental newsDepartmental) {
-        String sql = "INSERT INTO newsdepartmental (content, departmentalid) VALUES (:content, :departmentalid)";
+        String sql = "INSERT INTO newsdepartmental (content, departmentid) VALUES (:content, :departmentid)";
         try(Connection conn = SQLO.open()) {
             int id = (int) conn.createQuery(sql,true)
                     .addParameter("content", newsDepartmental.getContent())
-                    .addParameter("departmentalid", newsDepartmental.getDepartmentid())
+                    .addParameter("departmentid", newsDepartmental.getDepartmentid())
                     .executeUpdate().getKey();
             newsDepartmental.setId(id);
         }

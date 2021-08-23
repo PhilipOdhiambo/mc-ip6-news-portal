@@ -53,7 +53,7 @@ public class Sql2oDepartmentDao implements DepartmentDao {
 
     @Override
     public List<Employee> getEmployeesByDepartment(int departmentId) {
-        String sql = "SELECT * FROM employees WHERE departmentid = :id";
+        String sql = "SELECT * FROM employees WHERE departmentid = :departmentId";
         try(Connection conn = SQL2O.open()){
             return conn.createQuery(sql)
                     .addParameter("departmentid", departmentId)
