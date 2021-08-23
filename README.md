@@ -8,11 +8,11 @@
 
 ## Description
 
-There is need to structure communication in an organisation. This app help by organising the news items.
+There is need to structure communication in an organisation. This app helps by organising news-items.
 
-There is news for the general members of the organisation and news that are categorised as per the department.
+There is news for general members of the organisation and news that are categorised as per specific department.
 
-You are able to add news employees, news, departments and employee roles if authorized.
+You are able to add news employee, news, departments and employee-roles if authorized.
 
 ## HOW TO CONSUME API
 
