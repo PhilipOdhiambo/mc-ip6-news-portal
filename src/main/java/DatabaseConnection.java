@@ -17,7 +17,6 @@ public class DatabaseConnection {
             password = "4e201ca47300a64c3ddeaa14acd967c0aec930cad7a7d59e2941b884b6755c8c";
 
             sql2o = new Sql2o("jdbc:postgresql://" + host + ":5432/d7pbbvj5h1733r",userName,password);
-            ;
             return Integer.parseInt(processBuilder.environment().get("PORT"));
         }
 

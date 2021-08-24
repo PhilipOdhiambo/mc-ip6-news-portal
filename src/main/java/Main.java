@@ -5,23 +5,39 @@ import models.Department;
 import models.Employee;
 import models.News;
 import models.NewsDepartmental;
+import org.sql2o.Sql2o;
 
 public class Main {
-    public static void main(String[] args) {
+     static String user;
+     static String pass;
+     static String connectionString;
 
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            connectionString = "jdbc:postgresql://ec2-35-153-114-74.compute-1.amazonaws.com:5432/d7pbbvj5h1733r";
+            user = "apuajtilynanbk";
+            pass = "4e201ca47300a64c3ddeaa14acd967c0aec930cad7a7d59e2941b884b6755c8c";
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        // Return Local H2 connection
+
+        connectionString = "jdbc:h2:~/news-portal.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
+
+
+    public static void main(String[] args) {
+        port(getHerokuAssignedPort());
+        staticFileLocation("/public");
+        Sql2o sql2o = new Sql2o(connectionString, user, pass);
         Gson gson = new Gson();
 
-        // Database connection
-        int portNumber = DatabaseConnection.getPortNumber();
-        port(portNumber);
-
-        staticFileLocation("/public");
-
-        Sql2oDepartmentDao departments =  new Sql2oDepartmentDao(DatabaseConnection.sql2o);
-        Sql2oEmployeeDao employees = new Sql2oEmployeeDao(DatabaseConnection.sql2o);
-        Sqlo2RoleDao roles = new Sqlo2RoleDao(DatabaseConnection.sql2o);
-        Sql2oNewsDao newsGeneral = new Sql2oNewsDao(DatabaseConnection.sql2o);
-        Sql2oNewsDepartmentalDao newsDepartmental = new Sql2oNewsDepartmentalDao(DatabaseConnection.sql2o);
+        Sql2oDepartmentDao departments =  new Sql2oDepartmentDao(sql2o);
+        Sql2oEmployeeDao employees = new Sql2oEmployeeDao(sql2o);
+        Sqlo2RoleDao roles = new Sqlo2RoleDao(sql2o);
+        Sql2oNewsDao newsGeneral = new Sql2oNewsDao(sql2o);
+        Sql2oNewsDepartmentalDao newsDepartmental = new Sql2oNewsDepartmentalDao(sql2o);
 
         get("/", (req,res) -> {
             res.redirect("index.html");
@@ -52,7 +68,6 @@ public class Main {
         });
 
         // Delete a department
-
 
 
         // Employee/User Routes
