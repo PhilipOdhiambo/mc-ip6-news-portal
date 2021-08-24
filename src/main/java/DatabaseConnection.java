@@ -10,12 +10,13 @@ public class DatabaseConnection {
     public static int getPortNumber() {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
-            // Heroku connection
-            host = "ec2-54-205-232-84.compute-1.amazonaws.com";
-            userName= "mixpkrjhrdgrxj";
-            password = "bd9be143a2056efa51b7a9f9546478d783667151515a126be2b01d294aa50a9a";
 
-            sql2o = new Sql2o("jdbc:postgresql://" + host + ":5432/dbdiho906h1ffa",userName,password);
+            // Heroku connection
+            host = "ec2-35-153-114-74.compute-1.amazonaws.com";
+            userName= "apuajtilynanbk";
+            password = "4e201ca47300a64c3ddeaa14acd967c0aec930cad7a7d59e2941b884b6755c8c";
+
+            sql2o = new Sql2o("jdbc:postgresql://" + host + ":5432/d7pbbvj5h1733r",userName,password);
             ;
             return Integer.parseInt(processBuilder.environment().get("PORT"));
         }
