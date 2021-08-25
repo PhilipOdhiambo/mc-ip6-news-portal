@@ -131,29 +131,30 @@ public class Main {
         // NewsDepartmental
 
         //Post news
-        post("api/departments/:departmentId/news-departmental/new", "application/json",(req,res) -> {
+        post("/api/departments/:departmentId/news-departmental/new", "application/json",(req,res) -> {
             int departmentId = Integer.parseInt(req.params("departmentId"));
             NewsDepartmental departmentalNews = gson.fromJson(req.body(), NewsDepartmental.class);
+            departmentalNews.setDepartmentid(departmentId);
             newsDepartmental.add(departmentalNews);
             return gson.toJson(departmentalNews);
         });
 
         // Get news by id
-        get("api/departments/:departmentId/news-departmental/id", "application/json",(req,res) -> {
+        get("/api/departments/:departmentId/news-departmental/id", "application/json",(req,res) -> {
             int newsId = Integer.parseInt(req.params("id"));
             int departmentid = Integer.parseInt(req.params("departmentId"));
             return gson.toJson(newsDepartmental.getById(newsId, departmentid));
         });
 
-        // Get all general news
-        get("api/departmental-news", "application/json",(req,res) -> {
-            return gson.toJson(newsGeneral.getAll());
+        // Get all departmental news
+        get("/api/news-departmental", "application/json",(req,res) -> {
+            return gson.toJson(newsDepartmental.getAll());
         });
 
         // DELETE
 
         // Delete news by id
-        get("api/departmental-news/:id/delete", "application/json",(req,res) -> {
+        get("api/news-departmental/:id/delete", "application/json",(req,res) -> {
             int newsId = Integer.parseInt(req.params("id"));
             newsGeneral.deleteById(newsId);
             return null;
